@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from app.routes import sentiment, summarization
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = FastAPI(
     title="AI/ML Text Analysis API",
-    description="An API for sentiment analysis and text summarization using Hugging Face models.",
+    description="An API for sentiment analysis and text summarization using Hugging Face Inference API.",
     version="1.0.0"
 )
 
