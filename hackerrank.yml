@@ -12,6 +12,7 @@ configuration:
     default_open_files:
       - app/main.py
     project_menu:
-      run: "sudo uvicorn main:app --reload"
-      install: "virtualenv env1 && source env1/bin/activate && pip3 install -r requirements.txt;"
-      test: rm -rf unit.xml; source env1/bin/activate; pytest --junitxml=unit.xml --tb=short
+      run: sudo uvicorn app.main:app --reload
+      install: sudo python3 -m venv venv && source venv/bin/activate &&sudo pip install -r requirements.txt;
+      test: rm -rf unit.xml; source venv/bin/activate; pytest --junitxml=unit.xml --tb=short
+  
