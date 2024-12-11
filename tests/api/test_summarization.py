@@ -30,9 +30,3 @@ def test_summarization_empty_text():
     assert response.status_code == 400
     assert response.json()["detail"] == "Input text cannot be empty"
 
-def test_summarization_invalid_request():
-    response = client.post(
-        "/summarize",
-        json={}
-    )
-    assert response.status_code == 422  # FastAPI validation error

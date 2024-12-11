@@ -55,9 +55,3 @@ def test_sentiment_analysis_empty_text():
     assert response.status_code == 400
     assert response.json()["detail"] == "Input text cannot be empty"
 
-def test_sentiment_analysis_invalid_request():
-    response = client.post(
-        "/sentiment",
-        json={}
-    )
-    assert response.status_code == 422  # FastAPI validation error

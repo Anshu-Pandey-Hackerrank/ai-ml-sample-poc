@@ -6,17 +6,7 @@ router = APIRouter()
 
 @router.post("/sentiment", response_model=SentimentResponse)
 async def sentiment_analysis(request: SentimentRequest):
-    try:
-        result = analyze_sentiment(request.text)
-        return SentimentResponse(
-            text=request.text,
-            emotion=result["label"],
-            confidence=result["score"]
-        )
-    except ValueError as ve:
-        raise HTTPException(status_code=400, detail=str(ve))
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, 
-            detail=f"Internal Server Error: {str(e)}"
-        )
+    """
+    Endpoint for sentiment analysis.
+    """
+    pass

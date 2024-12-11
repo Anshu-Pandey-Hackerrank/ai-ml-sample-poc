@@ -2,13 +2,23 @@
 
 A RESTful API to assist content managers in analyzing user feedback and summarizing long documents. This API helps content managers process extensive user feedback and articles efficiently by providing sentiment analysis and text summarization capabilities.
 
+
+A FastAPI-based content analysis service that integrates with Hugging Face's state-of-the-art ML models. As a Fullstack ML engineer
+
 ## Features
 
 - **Sentiment Analysis**: Determine the emotional tone of user feedback
 - **Text Summarization**: Extract main points from lengthy documents
 - **RESTful Architecture**: Simple HTTP endpoints for easy integration
 
-## API Endpoints
+### Service Layer
+The service layer handles direct integration with Hugging Face models through their inference API. As a Fullstack ML engineer, you'll need to:
+
+- Integrate with facebook/bart-large-cnn model for text summarization
+- Integrate with SamLowe/roberta-base-go_emotions for sentiment analysis
+- Handle API responses and errors from Hugging Face
+
+## API Layer
 
 ### Sentiment Analysis
 
@@ -59,13 +69,13 @@ Generates a concise summary of a longer text.
 ### Bad Request (400)
 ```
 {
-"detail": "Text is required"
+"detail": "Input text cannot be empty"
 }
 ```
 ### Internal Server Error (500)
 ```
 {
-"detail": "Internal Server Error: [error message]"
+"detail": "Hugging Face API request failed: 500"
 }
 ```
 
