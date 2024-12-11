@@ -78,3 +78,31 @@ Command: `bash setup.sh`
 ## Testing
 
 Command: `pytest tests/`
+
+## Testing Strategy
+
+Our testing approach is divided into two main layers:
+
+### Service Layer Tests
+Located in `tests/services/`, these tests verify the core business logic:
+
+- Mock external API calls to Hugging Face
+- Test successful responses and data transformations
+- Validate error handling for:
+  - Empty or whitespace-only text
+  - API failures (500 errors)
+  - Connection issues
+  - Invalid response formats
+  - Edge cases
+
+### API Layer Tests
+Located in `tests/api/`, these tests verify the HTTP endpoints:
+
+- Test endpoint responses and status codes
+- Validate request/response schemas
+- Test real-world scenarios with example data
+- Verify error handling for:
+  - Invalid requests
+  - Empty inputs
+  - Schema validation
+  - Edge cases

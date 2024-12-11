@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import sentiment, summarization
+from app.api import sentiment_endpoint, summarization_endpoint
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -15,7 +15,7 @@ app = FastAPI(
 @app.get("/")
 async def welcome():
     return {
-        "message": "Welcome to the AI/ML Text Analysis API",
+        "message": "Welcome to the Content Text Analysis API",
         "available_endpoints": {
             "sentiment_analysis": "/sentiment",
             "text_summarization": "/summarize"
@@ -23,5 +23,5 @@ async def welcome():
     }
 
 # Include routes
-app.include_router(sentiment.router, prefix="", tags=["Sentiment Analysis"])
-app.include_router(summarization.router, prefix="", tags=["Text Summarization"])
+app.include_router(sentiment_endpoint.router, tags=["Sentiment Analysis"])
+app.include_router(summarization_endpoint.router, tags=["Text Summarization"])
