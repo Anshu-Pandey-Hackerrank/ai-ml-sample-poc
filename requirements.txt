@@ -4,3 +4,7 @@ transformers
 torch
 loguru
 pytest
+huggingface_hub
+python-dotenv
+httpx
+certifi

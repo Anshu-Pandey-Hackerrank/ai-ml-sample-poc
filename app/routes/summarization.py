@@ -1,18 +1,47 @@
 from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
 from app.models.summarization import summarize_text
 
 router = APIRouter()
 
+# Define request model
+class SummarizationRequest(BaseModel):
+    text: str
+
 @router.post("/summarize")
-async def text_summarization(payload: dict):
-    text = payload.get("text", "")
+async def text_summarization(request: SummarizationRequest):
+    """
+    FastAPI endpoint to handle text summarization requests.
     
-    if not text:
-        raise HTTPException(status_code=400, detail="Text is required")
+    Args:
+        request (SummarizationRequest): Request body containing text to summarize
+        
+    Returns:
+        dict: Contains the summarized text
+        
+    Raises:
+        HTTPException: 400 for invalid input, 500 for server errors
+    """
     try:
-        result = summarize_text(text)
-        return {"summary": result}
+        # Get summary from Hugging Face API
+        summary = summarize_text(request.text)
+        
+        # Return response
+        return {
+            "summary": summary,
+            "original_length": len(request.text),
+            "summary_length": len(summary)
+        }
+        
     except ValueError as ve:
-        raise HTTPException(status_code=400, detail=str(ve))
+        # Handle validation errors (empty text, etc.)
+        raise HTTPException(
+            status_code=400,
+            detail=str(ve)
+        )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+        # Handle all other errors (API failures, etc.)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal Server Error: {str(e)}"
+        )

@@ -48,7 +48,9 @@ Generates a concise summary of a longer text.
 
 ```
 {
-"summary": "Liana Barrientos married multiple times without divorcing previous husbands. She faces criminal charges for falsely claiming her 2010 marriage was her first on a marriage license application."
+"summary": "Liana Barrientos married multiple times without divorcing previous husbands.",
+"original_length": 432,
+"summary_length": 71
 }
 ```
 
@@ -66,3 +68,13 @@ Generates a concise summary of a longer text.
 "detail": "Internal Server Error: [error message]"
 }
 ```
+
+
+## Installation and Running
+
+Execute `bash setup.sh` for installation and running the server on port 8000.
+Command: `bash setup.sh`
+
+## Testing
+
+Command: `pytest tests/`
