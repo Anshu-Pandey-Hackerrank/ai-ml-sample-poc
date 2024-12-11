@@ -1,18 +1,19 @@
----
-version: 1.0
+version: 1
 configuration:
   has_webserver: true
   readonly_paths:
     - tests/*
   scoring:
-    command: "virtualenv env1 && source env1/bin/activate && pip3 install -r requirements.txt; pytest --junitxml=unit.xml"
+    command: virtualenv env1 && source env1/bin/activate && pip3 install -r
+      requirements.txt; pytest --junitxml=unit.xml
     files:
       - unit.xml
   ide_config:
     default_open_files:
       - app/main.py
     project_menu:
-      run: sudo uvicorn app.main:app --reload
-      install: sudo python3 -m venv venv && source venv/bin/activate &&sudo pip install -r requirements.txt;
-      test: rm -rf unit.xml; source venv/bin/activate; pytest --junitxml=unit.xml --tb=short
-  
+      run: source env1/bin/activate; python run.py
+      install: virtualenv env1 && source env1/bin/activate && pip3 install -r
+        requirements.txt;
+      test: rm -rf unit.xml; source env1/bin/activate; pytest --junitxml=unit.xml
+        --tb=short
